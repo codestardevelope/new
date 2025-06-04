@@ -1,0 +1,273 @@
+{
+	"actorSpecification": 1,
+	"name": "combined-job-scraper",
+	"version": "0.0",
+	"buildTag": "latest",
+	"input": "input.json",
+	"storages": {
+		"datasetMode": "append"
+	},
+	"inputSchema": {
+		"title": "Combined Job Scraper Input",
+		"type": "object",
+		"schemaVersion": 1,
+		"properties": {
+			"apifyApiToken": {
+				"title": "Apify API Token",
+				"type": "string",
+				"description": "Your Apify API token to trigger other actors.",
+				"editor": "textfield",
+				"minLength": 1,
+				"required": true
+			},
+			"linkedin": {
+				"title": "LinkedIn Scrapers",
+				"type": "object",
+				"properties": {
+					"actor1": {
+						"title": "LinkedIn Actor 1",
+						"type": "object",
+						"properties": {
+							"enabled": {
+								"title": "Enable LinkedIn Actor 1",
+								"type": "boolean",
+								"editor": "checkbox",
+								"default": false
+							},
+							"input": {
+								"title": "LinkedIn Actor 1 Input",
+								"type": "object",
+								"properties": {
+									"count": {
+										"title": "Count",
+										"type": "integer",
+										"editor": "numberfield",
+										"default": 10
+									},
+									"scrapeCompany": {
+										"title": "Scrape Company",
+										"type": "boolean",
+										"editor": "checkbox",
+										"default": true
+									},
+									"urls": {
+										"title": "URLs",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string"
+										},
+										"default": [
+											"https://www.linkedin.com/jobs/search/?position=1&pageNum=0"
+										]
+									}
+								},
+								"required": [
+									"count",
+									"scrapeCompany",
+									"urls"
+								]
+							}
+						}
+					},
+					"actor2": {
+						"title": "LinkedIn Actor 2",
+						"type": "object",
+						"properties": {
+							"enabled": {
+								"title": "Enable LinkedIn Actor 2",
+								"type": "boolean",
+								"editor": "checkbox",
+								"default": false
+							},
+							"input": {
+								"title": "LinkedIn Actor 2 Input",
+								"type": "object",
+								"properties": {
+									"company": {
+										"title": "Company URLs or names",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string"
+										},
+										"default": [
+											"https://www.linkedin.com/company/google",
+											"https://www.linkedin.com/company/microsoft",
+											"Netflix",
+											"Oracle Corp"
+										]
+									},
+									"easyApply": {
+										"title": "Easy Apply",
+										"type": "boolean",
+										"editor": "checkbox",
+										"default": false
+									},
+									"employmentType": {
+										"title": "Employment Type",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string",
+											"enum": [
+												"full-time",
+												"part-time",
+												"contract",
+												"temporary",
+												"volunteer",
+												"internship",
+												"other"
+											]
+										},
+										"default": [
+											"full-time",
+											"contract"
+										]
+									},
+									"jobTitles": {
+										"title": "Job Titles",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string"
+										},
+										"default": [
+											"software engineer",
+											"data scientist"
+										]
+									},
+									"locations": {
+										"title": "Locations",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string"
+										},
+										"default": [
+											"New York",
+											"California"
+										]
+									},
+									"maxItems": {
+										"title": "Maximum Items",
+										"type": "integer",
+										"editor": "numberfield",
+										"default": 10
+									},
+									"postedLimit": {
+										"title": "Posted Limit",
+										"type": "string",
+										"editor": "select",
+										"enum": [
+											"past-24h",
+											"past-week",
+											"past-month",
+											"all"
+										],
+										"default": "month"
+									},
+									"sortBy": {
+										"title": "Sort By",
+										"type": "string",
+										"editor": "select",
+										"enum": [
+											"relevance",
+											"date"
+										],
+										"default": "date"
+									},
+									"under10Applicants": {
+										"title": "Under 10 Applicants",
+										"type": "boolean",
+										"editor": "checkbox",
+										"default": false
+									},
+									"workplaceType": {
+										"title": "Workplace Type",
+										"type": "array",
+										"editor": "stringList",
+										"items": {
+											"type": "string",
+											"enum": [
+												"remote",
+												"on-site",
+												"hybrid"
+											]
+										},
+										"default": [
+											"remote",
+											"hybrid"
+										]
+									}
+								},
+								"required": [
+									"company",
+									"easyApply",
+									"employmentType",
+									"jobTitles",
+									"locations",
+									"maxItems",
+									"postedLimit",
+									"sortBy",
+									"under10Applicants",
+									"workplaceType"
+								]
+							}
+						}
+					}
+				}
+			},
+			"indeed": {
+				"title": "Indeed Scrapers",
+				"type": "object",
+				"properties": {
+					"actor1": {
+						"title": "Indeed Actor 1",
+						"type": "object",
+						"properties": {
+							"enabled": {
+								"title": "Enable Indeed Actor 1",
+								"type": "boolean",
+								"editor": "checkbox",
+								"default": false
+							},
+							"input": {
+								"title": "Indeed Actor 1 Input",
+								"type": "object",
+								"properties": {
+									"location": {
+										"title": "Location",
+										"type": "string",
+										"editor": "textfield",
+										"default": "US"
+									},
+									"maxItems": {
+										"title": "Maximum Items",
+										"type": "integer",
+										"editor": "numberfield",
+										"default": 20
+									},
+									"searchkeyword": {
+										"title": "Search Keyword",
+										"type": "string",
+										"editor": "textfield",
+										"default": "Web Developer"
+									}
+								},
+								"required": [
+									"location",
+									"maxItems",
+									"searchkeyword"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"required": [
+			"apifyApiToken"
+		]
+	}
+} 
