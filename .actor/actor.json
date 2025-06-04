@@ -1,39 +1,96 @@
 {
-  "title": "Combined Job Scraper Input",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-    "apifyApiToken": {
-      "title": "Apify API Token",
-      "type": "string",
-      "editor": "textfield"
-    },
-    "linkedin": {
-      "title": "LinkedIn",
-      "type": "object",
-      "properties": {
-        "actor1": {
-          "title": "LinkedIn Actor 1",
-          "type": "object",
-          "properties": {
-            "enabled": { "type": "boolean", "default": false },
-            "schedule": { "type": "string", "editor": "textfield" },
-            "input": {
-              "type": "object",
-              "properties": {
-                "count": { "type": "integer", "default": 10 },
-                "scrapeCompany": { "type": "boolean", "default": true },
-                "urls": {
-                  "type": "array",
-                  "items": { "type": "string" },
-                  "default": ["https://www.linkedin.com/jobs/search/?position=1&pageNum=0"]
+  "name": "combined-job-scraper",
+  "version": "0.0.1",
+  "buildTag": "latest",
+  "env": {
+    "APIFY_MEMORY_MBYTES": 1024
+  },
+  "input": {
+    "title": "Combined Job Scraper Input Schema",
+    "description": "Scrape jobs from LinkedIn and Indeed using multiple actors with scheduling.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "apifyApiToken": {
+        "title": "Apify API Token",
+        "type": "string",
+        "description": "Your personal Apify API token (required)",
+        "editor": "textfield"
+      },
+      "linkedin": {
+        "title": "LinkedIn",
+        "type": "object",
+        "description": "LinkedIn platform configuration",
+        "properties": {
+          "actor1": {
+            "title": "LinkedIn Actor 1",
+            "type": "object",
+            "properties": {
+              "enabled": { "title": "Enable", "type": "boolean", "default": false },
+              "schedule": { "title": "Schedule Time (ISO)", "type": "string", "editor": "textfield" },
+              "input": {
+                "type": "object",
+                "properties": {
+                  "count": { "type": "integer", "default": 10 },
+                  "scrapeCompany": { "type": "boolean", "default": true },
+                  "urls": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "default": ["https://www.linkedin.com/jobs/search/?position=1&pageNum=0"]
+                  }
+                }
+              }
+            }
+          },
+          "actor2": {
+            "title": "LinkedIn Actor 2",
+            "type": "object",
+            "properties": {
+              "enabled": { "title": "Enable", "type": "boolean", "default": false },
+              "schedule": { "title": "Schedule Time (ISO)", "type": "string", "editor": "textfield" },
+              "input": {
+                "type": "object",
+                "properties": {
+                  "company": { "type": "array", "items": { "type": "string" } },
+                  "easyApply": { "type": "boolean" },
+                  "employmentType": { "type": "array", "items": { "type": "string" } },
+                  "jobTitles": { "type": "array", "items": { "type": "string" } },
+                  "locations": { "type": "array", "items": { "type": "string" } },
+                  "maxItems": { "type": "integer" },
+                  "postedLimit": { "type": "string" },
+                  "sortBy": { "type": "string" },
+                  "under10Applicants": { "type": "boolean" },
+                  "workplaceType": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            }
+          }
+        }
+      },
+      "indeed": {
+        "title": "Indeed",
+        "type": "object",
+        "description": "Indeed platform configuration",
+        "properties": {
+          "actor1": {
+            "title": "Indeed Actor 1",
+            "type": "object",
+            "properties": {
+              "enabled": { "title": "Enable", "type": "boolean", "default": false },
+              "schedule": { "title": "Schedule Time (ISO)", "type": "string", "editor": "textfield" },
+              "input": {
+                "type": "object",
+                "properties": {
+                  "location": { "type": "string", "default": "US" },
+                  "maxItems": { "type": "integer", "default": 20 },
+                  "searchkeyword": { "type": "string", "default": "Web Developer" }
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "required": ["apifyApiToken"]
+    },
+    "required": ["apifyApiToken"]
+  }
 }
