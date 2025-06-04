@@ -1,0 +1,15 @@
+{
+  "name": "combined-job-scraper",
+  "version": "0.0.1",
+  "description": "Combined LinkedIn and Indeed job scraper",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "apify": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
