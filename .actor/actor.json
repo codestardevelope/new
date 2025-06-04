@@ -1,0 +1,39 @@
+{
+  "title": "Combined Job Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "apifyApiToken": {
+      "title": "Apify API Token",
+      "type": "string",
+      "editor": "textfield"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "type": "object",
+      "properties": {
+        "actor1": {
+          "title": "LinkedIn Actor 1",
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false },
+            "schedule": { "type": "string", "editor": "textfield" },
+            "input": {
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer", "default": 10 },
+                "scrapeCompany": { "type": "boolean", "default": true },
+                "urls": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "default": ["https://www.linkedin.com/jobs/search/?position=1&pageNum=0"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["apifyApiToken"]
+}
